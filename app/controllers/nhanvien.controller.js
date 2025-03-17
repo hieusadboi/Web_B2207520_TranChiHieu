@@ -16,6 +16,10 @@ exports.create = async (req, res, next) => {
         return next(new ApiError(400, 'Id không được bỏ trống'));
     }
 
+    if (!req.body?.emailNV) {
+        return next(new ApiError(400, 'Email đọc giả không thể để trống.'));
+    }
+
     try {
         const nhanvienService = new NhanvienService(MongoDB.client);        
         const document = await nhanvienService.create(req.body);

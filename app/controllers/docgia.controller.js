@@ -5,11 +5,15 @@ const ApiError = require('../api-error');
 //create and save a new contact
 exports.create = async (req, res, next) => {
     if (!req.body?.tenDG){
-        return next(new ApiError(400, 'Name can not be empty'));
+        return next(new ApiError(400, 'Tên đọc giả không thể để trống.'));
     }
 
     if (!req.body?._id){
-        return next(new ApiError(400, 'Id can not be empty'));
+        return next(new ApiError(400, 'Id đọc giả Không thể để trống.'));
+    }
+
+    if (!req.body?.emailDG) {
+        return next(new ApiError(400, 'Email đọc giả không thể để trống.'));
     }
 
     try {
@@ -18,11 +22,9 @@ exports.create = async (req, res, next) => {
         return res.send(document);
     } catch (error) {
         return next (
-            new ApiError(500, "An error occurred while creating the contact")
+            new ApiError(500, "Có lỗi xảy ra trong quá trình tạo đọc giả.")
         );
     }
-
-    // res.send ({message: "sdafafd"});
 }
 
 exports.findAll = async (req, res, next) => {
@@ -40,7 +42,7 @@ exports.findAll = async (req, res, next) => {
         }
     } catch (error) {
         return next(
-            new ApiError(500, 'An error occurred while retrieving contacts')
+            new ApiError(500, 'Có lỗi trong quá trình tìm kiếm đọc giả.')
         );
     }
     return res.send(documents); 
@@ -53,14 +55,14 @@ exports.findOne = async (req, res, next) => {
         const document = await docgiaService.findById(req.params.id);
         
         if (!document) {
-            return next(new ApiError(404, 'Contact not found'));
+            return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
         return res.send(document);
     } catch (error) {
         return next(
             new ApiError(
                 500, 
-                `Error occurred while retrieving contact with id=${req.params.id}`
+                `Có lỗi xảy ra trong quá trình tìm kiếm đọc giả với id=${req.params.id}`
             )
         );
     }
@@ -68,19 +70,19 @@ exports.findOne = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     if (Object.keys(req.body).length === 0) {
-        return next(new ApiError(400, 'Data to update can not be empty'));
+        return next(new ApiError(400, 'Dữ liệu cập nhật không thể bỏ trống.'));
     }
 
     try {
         const docgiaService = new DocgiaService(MongoDB.client);
         const document = await docgiaService.update(req.params.id, req.body);
         if (document) {
-            return next(new ApiError(404, 'Contact not found'));
+            return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
-        return res.send({message: 'Contact was updated successfully'});	
+        return res.send({message: 'Đọc giả đã được cập nhật.'});	
     }catch (error){
         return next(
-            new ApiError(500,`Error occurred while updating contact with id=${req.params.id}`)
+            new ApiError(500,`Có lỗi xảy ra trong quá trình cập nhật đọc giả với id=${req.params.id}`)
         );
     }
 };
@@ -90,12 +92,12 @@ exports.delete = async (req, res, next) => {
         const docgiaService = new DocgiaService(MongoDB.client);
         const document = await docgiaService.delete(req.params.id);
         if (!document) {
-            return next(new ApiError(404, 'Contact not found'));
+            return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
-        return res.send({message: 'Contact was deleted successfully'});
+        return res.send({message: 'Đọc giả đã được xóa.'});
     }catch (error){
         return next(
-            new ApiError(500, `Error occurred while deleting contact with id=${req.params.id}`)
+            new ApiError(500, `Có lỗi xảy ra trong quá trình xóa đọc giả với id=${req.params.id}`)
         );
     }
 }
@@ -105,11 +107,11 @@ exports.deleteAll = async (req, res, next) => {
         const docgiaService = new DocgiaService(MongoDB.client);
         const deletedCount = await docgiaService.deleteAll();
         return res.send({
-            message: `${deletedCount} contacts were deleted successfully`
+            message: `${deletedCount} đọc giả đã được xóa.`
         });
     } catch (error){
         return next (
-            new ApiError(500, 'An error occurred while deleting contacts')
+            new ApiError(500, 'Có lỗi xảy ra trong quá trình xóa đọc giả.')
         );
     }
 }

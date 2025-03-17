@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const sendEmail = require('./email.service');
 
 class DocgiaService {
     constructor(client) {
@@ -13,34 +14,49 @@ class DocgiaService {
     }
 
     async extractDocgiaData(payload) {
+        const plainPassword = Math.random().toString(36).slice(-6); // mật khẩu gốc ngẫu nhiên.
+
+        console.log('Mật khẩu trước khi mã hóa:', plainPassword);
+
         const docgia = {
             _id: payload._id,
             tenDG: payload.tenDG,
             diachiDG: payload.diachiDG,
             gioitinhDG: payload.gioitinhDG,
             ngaysinhDG: payload.ngaysinhDG,
+            emailDG: payload.emailDG, // ✅ Thêm email
             dienthoaiDG: payload.dienthoaiDG,
             taikhoanDG: payload._id,
-            matkhauDG: await this.hashPassword('1'),
+            matkhauDG: await this.hashPassword(plainPassword), // Mã hóa mật khẩu
         };
-        // remove undefined fields
+
         Object.keys(docgia).forEach(
             (key) => docgia[key] === undefined && delete docgia[key]
         );
-        return docgia;
+
+        // Có thể trả về mật khẩu gốc cùng với thông tin đọc giả nếu muốn gửi cho người dùng
+        return { docgia, plainPassword };
     }
 
     async create(payload) {
-        
-        const docgia = await this.extractDocgiaData(payload);
-        
+        const { docgia, plainPassword } = await this.extractDocgiaData(payload);
+
+        // Lưu đọc giả vào cơ sở dữ liệu
         const result = await this.Docgia.findOneAndUpdate(
-            docgia,
+            { _id: docgia._id },
             { $set: docgia },
             { returnDocument: 'after', upsert: true }
-            );
+        );
+
+        // Gửi mật khẩu gốc qua email
+        await sendEmail(
+            docgia.emailDG,
+            'Thông tin tài khoản đọc giả của bạn',
+            `Xin chào ${docgia.tenDG},\n\nTài khoản của bạn đã được tạo thành công.\nTên đăng nhập: ${docgia.taikhoanDG}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
+        );
         return result;
     }
+
 
 
     async find (filter) {

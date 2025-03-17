@@ -1,12 +1,11 @@
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
-
+const sendEmail = require('./email.service');
 
 class NhanvienService {
     constructor(client) {
         this.Nhanvien = client.db().collection('nhanvien');
     }
-//    dinh ngia cac phuong thuc
 
     async hashPassword(password) {
         const salt = await bcrypt.genSalt(10); // Tạo salt với độ khó 10
@@ -15,32 +14,43 @@ class NhanvienService {
     }
 
     async extractNhanvienData(payload) {
-        const mk = await this.hashPassword("1")
-         const nhanvien = {
+
+        const plainPassword = Math.random().toString(36).slice(-6); // mật khẩu gốc ngẫu nhiên.
+         
+        const nhanvien = {
             _id: payload._id,
             tenNV: payload.tenNV,
             diachiNV: payload.diachiNV,
             chucvuNV: payload.chucvuNV,
             dienthoaiNV: payload.dienthoaiNV,
+            emailNV: payload.emailNV,
             taikhoanNV: payload._id,
-            matkhauNV: mk,
+            matkhauNV: await this.hashPassword(plainPassword),
         };
-        // remove undefined fields
+
         Object.keys(nhanvien).forEach(
             (key) => nhanvien[key] === undefined && delete nhanvien[key]
         );
-        return nhanvien;
+
+        return {nhanvien, plainPassword};
     }
 
     async create(payload) {
         
-        const nhanvien = await this.extractNhanvienData(payload);
+        const {nhanvien, plainPassword} = await this.extractNhanvienData(payload);
         
         const result = await this.Nhanvien.findOneAndUpdate(
-            nhanvien,
+            { _id: nhanvien._id },
             { $set: nhanvien },
             { returnDocument: 'after', upsert: true }
-            );
+        );
+
+            // Gửi mật khẩu gốc qua email
+        await sendEmail(
+            nhanvien.emailNV,
+            'Thông tin tài khoản nhân viên của bạn',
+            `Xin chào ${nhanvien.tenNV},\n\nTài khoản nhân viên của bạn đã được tạo thành công.\nTên đăng nhập: ${nhanvien.taikhoanNV}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
+        );
         return result;
     }
 

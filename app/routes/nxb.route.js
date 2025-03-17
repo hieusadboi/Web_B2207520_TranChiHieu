@@ -8,9 +8,6 @@ router.route('/')
     .post(nxb.create)
     .delete(nxb.deleteAll);
 
-// router.route('/favorite')
-//     .get(nxb.findAllFavorite);
-
 router.route('/:id')
     .get(nxb.findOne)
     .put(nxb.update)
