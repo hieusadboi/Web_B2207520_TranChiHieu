@@ -58,7 +58,6 @@ class DocgiaService {
     }
 
 
-
     async find (filter) {
         const cursor = this.Docgia.find(filter);
         return await cursor.toArray();
@@ -97,25 +96,26 @@ class DocgiaService {
     }
 
     async update(id, payload) {
-        const filter = {
-            _id: id ? id : null,
-        };    
+        const filter = { _id: id };
         const update = {
-            _id: payload._id,
             tenDG: payload.tenDG,
             diachiDG: payload.diachiDG,
             gioitinhDG: payload.gioitinhDG,
             ngaysinhDG: payload.ngaysinhDG,
+            emailDG: payload.emailDG,
             dienthoaiDG: payload.dienthoaiDG,
-            matkhauDG: await this.hashPassword(payload.matkhauDG),
-        };
+        }; 
+
         const result = await this.Docgia.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: 'after' }
         );
-        return result.updatedExisting;
+        
+        return result ? true : false;
     }
+
+    // đổi mk đang k hoạt động.
 
     async delete(id) {
         const result = await this.Docgia.findOneAndDelete({
