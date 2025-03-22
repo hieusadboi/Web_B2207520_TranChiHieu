@@ -4,11 +4,11 @@ const ApiError = require('../api-error');
 
 //create and save a new contact
 exports.create = async (req, res, next) => {
-    if (!req.body?.tenDG){
+    if (!req.body?.tenDG) {
         return next(new ApiError(400, 'Tên đọc giả không thể để trống.'));
     }
 
-    if (!req.body?._id){
+    if (!req.body?._id) {
         return next(new ApiError(400, 'Id đọc giả Không thể để trống.'));
     }
 
@@ -17,11 +17,11 @@ exports.create = async (req, res, next) => {
     }
 
     try {
-        const docgiaService = new DocgiaService(MongoDB.client);        
+        const docgiaService = new DocgiaService(MongoDB.client);
         const document = await docgiaService.create(req.body);
         return res.send(document);
     } catch (error) {
-        return next (
+        return next(
             new ApiError(500, "Có lỗi xảy ra trong quá trình tạo đọc giả.")
         );
     }
@@ -31,11 +31,11 @@ exports.findAll = async (req, res, next) => {
     let documents = [];
     try {
         const docgiaService = new DocgiaService(MongoDB.client);
-        const {name} = req.query;
-        const {taikhoanDG} = req.query;
+        const { name } = req.query;
+        const { taikhoanDG } = req.query;
         if (name) {
             documents = await docgiaService.findByName(name);
-        }else if(taikhoanDG){
+        } else if (taikhoanDG) {
             documents = await docgiaService.findByTaiKhoan(taikhoanDG);
         } else {
             documents = await docgiaService.find({});
@@ -45,15 +45,15 @@ exports.findAll = async (req, res, next) => {
             new ApiError(500, 'Có lỗi trong quá trình tìm kiếm đọc giả.')
         );
     }
-    return res.send(documents); 
+    return res.send(documents);
 };
 
 exports.findOne = async (req, res, next) => {
     try {
         const docgiaService = new DocgiaService(MongoDB.client);
-        
+
         const document = await docgiaService.findById(req.params.id);
-        
+
         if (!document) {
             return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
@@ -61,7 +61,7 @@ exports.findOne = async (req, res, next) => {
     } catch (error) {
         return next(
             new ApiError(
-                500, 
+                500,
                 `Có lỗi xảy ra trong quá trình tìm kiếm đọc giả với id=${req.params.id}`
             )
         );
@@ -79,10 +79,10 @@ exports.update = async (req, res, next) => {
         if (document) {
             return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
-        return res.send({message: 'Đọc giả đã được cập nhật.'});	
-    }catch (error){
+        return res.send({ message: 'Đọc giả đã được cập nhật.' });
+    } catch (error) {
         return next(
-            new ApiError(500,`Có lỗi xảy ra trong quá trình cập nhật đọc giả với id=${req.params.id}`)
+            new ApiError(500, `Có lỗi xảy ra trong quá trình cập nhật đọc giả với id=${req.params.id}`)
         );
     }
 };
@@ -94,8 +94,8 @@ exports.delete = async (req, res, next) => {
         if (!document) {
             return next(new ApiError(404, 'Không tìm thấy đọc giả.'));
         }
-        return res.send({message: 'Đọc giả đã được xóa.'});
-    }catch (error){
+        return res.send({ message: 'Đọc giả đã được xóa.' });
+    } catch (error) {
         return next(
             new ApiError(500, `Có lỗi xảy ra trong quá trình xóa đọc giả với id=${req.params.id}`)
         );
@@ -109,10 +109,30 @@ exports.deleteAll = async (req, res, next) => {
         return res.send({
             message: `${deletedCount} đọc giả đã được xóa.`
         });
-    } catch (error){
-        return next (
+    } catch (error) {
+        return next(
             new ApiError(500, 'Có lỗi xảy ra trong quá trình xóa đọc giả.')
         );
     }
 }
 
+
+exports.changePassword = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Sử dụng id vì id và tài khoản giống nhau
+        const { oldPassword, newPassword } = req.body;
+
+        if (!oldPassword || !newPassword) {
+            throw new ApiError(400, 'Thiếu mật khẩu cũ hoặc mật khẩu mới');
+        }
+
+        const docgiaService = new DocgiaService(MongoDB.client);
+        await docgiaService.changePassword(id, oldPassword, newPassword);
+
+        return res.send({ message: 'Mật khẩu đã được cập nhật thành công' });
+    } catch (error) {
+        return next(
+            new ApiError(500, error.message || 'Có lỗi xảy ra khi đổi mật khẩu')
+        );
+    }
+};

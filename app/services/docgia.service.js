@@ -55,17 +55,17 @@ class DocgiaService {
             `Xin chào ${docgia.tenDG},\n\nTài khoản của bạn đã được tạo thành công.\nTên đăng nhập: ${docgia.taikhoanDG}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
         );
         return result;
-    }
+    } // đang lỗi tạo mới khi đã có tk này rồi
 
 
-    async find (filter) {
+    async find(filter) {
         const cursor = this.Docgia.find(filter);
         return await cursor.toArray();
     }
 
     async findByName(name) {
         return await this.find({
-            tenDG: {$regex: new RegExp(new RegExp(name)), $options: 'i'}
+            tenDG: { $regex: new RegExp(new RegExp(name)), $options: 'i' }
         });
     }
 
@@ -79,7 +79,7 @@ class DocgiaService {
         // if (!ObjectId.isValid(id)) {
         //     throw new Error('Invalid ObjectId');
         // }
-        
+
         try {
             const docgia = await this.Docgia.findOne({
                 _id: id,
@@ -104,14 +104,14 @@ class DocgiaService {
             ngaysinhDG: payload.ngaysinhDG,
             emailDG: payload.emailDG,
             dienthoaiDG: payload.dienthoaiDG,
-        }; 
+        };
 
         const result = await this.Docgia.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: 'after' }
         );
-        
+
         return result ? true : false;
     }
 
@@ -124,9 +124,52 @@ class DocgiaService {
         return result;
     }
 
-    async deleteAll (){
+    async deleteAll() {
         const result = await this.Docgia.deleteMany({});
         return result.deletedCount;
+    }
+
+    async changePassword(id, oldPassword, newPassword) {
+        try {
+            if (!id || !oldPassword || !newPassword) {
+                throw new Error('Thiếu thông tin tài khoản hoặc mật khẩu');
+            }
+
+            const docgia = await this.findById(id);
+            if (!docgia) {
+                throw new Error('Không tìm thấy độc giả');
+            }
+
+            // Kiểm tra mật khẩu cũ
+            const isMatch = await bcrypt.compare(oldPassword, docgia.matkhauDG);
+            if (!isMatch) {
+                throw new Error('Mật khẩu cũ không đúng');
+            }
+
+            // Cập nhật mật khẩu mới
+            const hashedPassword = await this.hashPassword(newPassword);
+            const result = await this.Docgia.findOneAndUpdate(
+                { _id: id },
+                { $set: { matkhauDG: hashedPassword } },
+                { returnDocument: 'after' }
+            );
+
+            if (!result) {
+                throw new Error('Cập nhật mật khẩu thất bại');
+            }
+
+            // Gửi email thông báo
+            await sendEmail(
+                docgia.emailDG,
+                'Mật khẩu đã được thay đổi',
+                `Xin chào đọc giả ${docgia.tenDG},\n\nMật khẩu tài khoản của bạn đã được cập nhật thành công.`
+            );
+
+            return result;
+        } catch (error) {
+            console.error('Lỗi khi đổi mật khẩu:', error.message);
+            throw error;
+        }
     }
 }
 

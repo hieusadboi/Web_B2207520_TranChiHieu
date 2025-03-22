@@ -16,7 +16,7 @@ class NhanvienService {
     async extractNhanvienData(payload) {
 
         const plainPassword = Math.random().toString(36).slice(-6); // mật khẩu gốc ngẫu nhiên.
-         
+
         const nhanvien = {
             _id: payload._id,
             tenNV: payload.tenNV,
@@ -32,20 +32,20 @@ class NhanvienService {
             (key) => nhanvien[key] === undefined && delete nhanvien[key]
         );
 
-        return {nhanvien, plainPassword};
+        return { nhanvien, plainPassword };
     }
 
     async create(payload) {
-        
-        const {nhanvien, plainPassword} = await this.extractNhanvienData(payload);
-        
+
+        const { nhanvien, plainPassword } = await this.extractNhanvienData(payload);
+
         const result = await this.Nhanvien.findOneAndUpdate(
             { _id: nhanvien._id },
             { $set: nhanvien },
             { returnDocument: 'after', upsert: true }
         );
 
-            // Gửi mật khẩu gốc qua email
+        // Gửi mật khẩu gốc qua email
         await sendEmail(
             nhanvien.emailNV,
             'Thông tin tài khoản nhân viên của bạn',
@@ -55,14 +55,14 @@ class NhanvienService {
     }
 
 
-    async find (filter) {
+    async find(filter) {
         const cursor = this.Nhanvien.find(filter);
         return await cursor.toArray();
     }
 
     async findByName(name) {
         return await this.find({
-            tenNV: {$regex: new RegExp(new RegExp(name)), $options: 'i'}
+            tenNV: { $regex: new RegExp(new RegExp(name)), $options: 'i' }
         });
     }
 
@@ -76,7 +76,7 @@ class NhanvienService {
         // if (!ObjectId.isValid(id)) {
         //     throw new Error('Invalid ObjectId');
         // }
-        
+
         try {
             const nhanvien = await this.Nhanvien.findOne({
                 _id: id,
@@ -93,24 +93,19 @@ class NhanvienService {
     }
 
     async update(id, payload) {
-        const filter = {
-            _id: id ? id : null,
-        };    
+        const filter = { _id: id };
         const update = {
-            _id: payload._id,
             tenNV: payload.tenNV,
             diachiNV: payload.diachiNV,
-            chucvuNV: payload.chucvuNV,
             dienthoaiNV: payload.dienthoaiNV,
-            taikhoanNV: payload._id,
-            matkhauNV: await this.hashPassword(payload.matkhauNV),
+            emailNV: payload.emailNV,
         };
         const result = await this.Nhanvien.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: 'after' }
         );
-        return result.updatedExisting;
+        return result ? true : false;
     }
 
     async delete(id) {
@@ -120,9 +115,52 @@ class NhanvienService {
         return result;
     }
 
-    async deleteAll (){
+    async deleteAll() {
         const result = await this.Nhanvien.deleteMany({});
         return result.deletedCount;
+    }
+
+    async changePassword(id, oldPassword, newPassword) {
+        try {
+            if (!id || !oldPassword || !newPassword) {
+                throw new Error('Thiếu thông tin id hoặc mật khẩu');
+            }
+
+            const nhanvien = await this.findById(id);
+            if (!nhanvien) {
+                throw new Error('Không tìm thấy nhân viên');
+            }
+
+            // Kiểm tra mật khẩu cũ
+            const isMatch = await bcrypt.compare(oldPassword, nhanvien.matkhauNV);
+            if (!isMatch) {
+                throw new Error('Mật khẩu cũ không đúng');
+            }
+
+            // Cập nhật mật khẩu mới
+            const hashedPassword = await this.hashPassword(newPassword);
+            const result = await this.Nhanvien.findOneAndUpdate(
+                { _id: id },
+                { $set: { matkhauNV: hashedPassword } },
+                { returnDocument: 'after' }
+            );
+
+            if (!result) {
+                throw new Error('Cập nhật mật khẩu thất bại');
+            }
+
+            // Gửi email thông báo
+            await sendEmail(
+                nhanvien.emailNV,
+                'Mật khẩu đã được thay đổi',
+                `Xin chào nhân viên ${nhanvien.tenNV},\n\nMật khẩu tài khoản của bạn đã được cập nhật thành công.`
+            );
+
+            return result;
+        } catch (error) {
+            console.error('Lỗi khi đổi mật khẩu:', error.message);
+            throw error;
+        }
     }
 }
 

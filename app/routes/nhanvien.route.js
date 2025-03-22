@@ -13,4 +13,7 @@ router.route('/:id')
     .put(nhanvien.update)
     .delete(nhanvien.delete);
 
+router.route('/:id/changePassword')
+    .put(nhanvien.changePassword);
+
 module.exports = router;

@@ -4,15 +4,15 @@ const ApiError = require('../api-error');
 
 //create and save a new contact
 exports.create = async (req, res, next) => {
-    if (!req.body?.tenNV){
+    if (!req.body?.tenNV) {
         return next(new ApiError(400, 'Tên không được bỏ trống'));
     }
 
-    if (!req.body?.chucvuNV){
+    if (!req.body?.chucvuNV) {
         return next(new ApiError(400, 'Chức vụ không được bỏ trống'));
     }
 
-    if (!req.body?._id){
+    if (!req.body?._id) {
         return next(new ApiError(400, 'Id không được bỏ trống'));
     }
 
@@ -21,11 +21,11 @@ exports.create = async (req, res, next) => {
     }
 
     try {
-        const nhanvienService = new NhanvienService(MongoDB.client);        
+        const nhanvienService = new NhanvienService(MongoDB.client);
         const document = await nhanvienService.create(req.body);
         return res.send(document);
     } catch (error) {
-        return next (
+        return next(
             new ApiError(500, "Có lỗi trong khi tạo nhân viên mới")
         );
     }
@@ -36,11 +36,11 @@ exports.findAll = async (req, res, next) => {
     let documents = [];
     try {
         const nhanvienService = new NhanvienService(MongoDB.client);
-        const {name} = req.query;
-        const {taikhoanNV} = req.query;
+        const { name } = req.query;
+        const { taikhoanNV } = req.query;
         if (name) {
             documents = await nhanvienService.findByName(name);
-        }else if(taikhoanNV) {
+        } else if (taikhoanNV) {
             documents = await nhanvienService.findByTaiKhoan(taikhoanNV);
         } else {
             documents = await nhanvienService.find({});
@@ -50,15 +50,15 @@ exports.findAll = async (req, res, next) => {
             new ApiError(500, 'Có lỗi xảy ra khi tìm kiếm nhân viên')
         );
     }
-    return res.send(documents); 
+    return res.send(documents);
 };
 
 exports.findOne = async (req, res, next) => {
     try {
         const nhanvienService = new NhanvienService(MongoDB.client);
-        
+
         const document = await nhanvienService.findById(req.params.id);
-        
+
         if (!document) {
             return next(new ApiError(404, 'Nhân viên không tồn tại'));
         }
@@ -66,7 +66,7 @@ exports.findOne = async (req, res, next) => {
     } catch (error) {
         return next(
             new ApiError(
-                500, 
+                500,
                 `Có lỗi xảy ra trong khi tìm kiếm id=${req.params.id}`
             )
         );
@@ -84,10 +84,10 @@ exports.update = async (req, res, next) => {
         if (document) {
             return next(new ApiError(404, 'Nhân viên không tồn tại'));
         }
-        return res.send({message: 'Nhân viên được cập nhật thành công'});	
-    }catch (error){
+        return res.send({ message: 'Nhân viên được cập nhật thành công' });
+    } catch (error) {
         return next(
-            new ApiError(500,`Có lỗi xảy ra trong khi cập nhật id=${req.params.id}`)
+            new ApiError(500, `Có lỗi xảy ra trong khi cập nhật id=${req.params.id}`)
         );
     }
 };
@@ -99,8 +99,8 @@ exports.delete = async (req, res, next) => {
         if (!document) {
             return next(new ApiError(404, 'Nhân viên không tồn tại'));
         }
-        return res.send({message: 'Nhân viên được xóa thành công'});
-    }catch (error){
+        return res.send({ message: 'Nhân viên được xóa thành công' });
+    } catch (error) {
         return next(
             new ApiError(500, `Có lỗi xảy ra trong khi xóa id=${req.params.id}`)
         );
@@ -114,9 +114,29 @@ exports.deleteAll = async (req, res, next) => {
         return res.send({
             message: `${deletedCount} nhân viên được xóa thành công`
         });
-    } catch (error){
-        return next (
+    } catch (error) {
+        return next(
             new ApiError(500, 'Có lỗi xảy ra trong khi xóa')
         );
     }
 }
+
+exports.changePassword = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { oldPassword, newPassword } = req.body;
+
+        if (!oldPassword || !newPassword) {
+            throw new ApiError(400, 'Thiếu mật khẩu cũ hoặc mật khẩu mới');
+        }
+
+        const nhanvienService = new NhanvienService(MongoDB.client);
+        await nhanvienService.changePassword(id, oldPassword, newPassword);
+
+        return res.send({ message: 'Mật khẩu đã được cập nhật thành công' });
+    } catch (error) {
+        return next(
+            new ApiError(500, error.message || 'Có lỗi xảy ra khi đổi mật khẩu')
+        );
+    }
+};
