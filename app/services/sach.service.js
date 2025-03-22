@@ -4,7 +4,7 @@ class SachService {
     constructor(client) {
         this.Sach = client.db().collection('sach');
     }
-//    dinh ngia cac phuong thuc
+    //    dinh ngia cac phuong thuc
     extractSachData(payload) {
         const sach = {
             _id: payload._id,
@@ -21,27 +21,41 @@ class SachService {
         return sach;
     }
 
+    // async create(payload) {
+
+    //     const sach = this.extractSachData(payload);
+
+    //     const result = await this.Sach.findOneAndUpdate(
+    //         sach,
+    //         { $set: sach },
+    //         { returnDocument: 'after', upsert: true }
+    //         );
+    //     return result;
+    // }
+
     async create(payload) {
-        
         const sach = this.extractSachData(payload);
-        
-        const result = await this.Sach.findOneAndUpdate(
-            sach,
-            { $set: sach },
-            { returnDocument: 'after', upsert: true }
-            );
-        return result;
+
+        // Kiểm tra nếu sách đã tồn tại
+        const existingSach = await this.Sach.findOne({ _id: sach._id });
+        if (existingSach) {
+            throw new Error('Sách đã tồn tại!');
+        }
+
+        // Tạo sách mới
+        return await this.Sach.insertOne(sach);
     }
 
 
-    async find (filter) {
+
+    async find(filter) {
         const cursor = this.Sach.find(filter);
         return await cursor.toArray();
     }
 
     async findByName(name) {
         return await this.find({
-            tenSach: {$regex: new RegExp(new RegExp(name)), $options: 'i'}
+            tenSach: { $regex: new RegExp(new RegExp(name)), $options: 'i' }
         });
     }
 
@@ -49,7 +63,7 @@ class SachService {
         // if (!ObjectId.isValid(id)) {
         //     throw new Error('Invalid ObjectId');
         // }
-        
+
         try {
             const sach = await this.Sach.findOne({
                 _id: id,
@@ -68,7 +82,7 @@ class SachService {
     async update(id, payload) {
         const filter = {
             _id: id ? id : null,
-        };    
+        };
         const update = this.extractSachData(payload);
         const result = await this.Sach.findOneAndUpdate(
             filter,
@@ -85,7 +99,7 @@ class SachService {
         return result;
     }
 
-    async deleteAll (){
+    async deleteAll() {
         const result = await this.Sach.deleteMany({});
         return result.deletedCount;
     }

@@ -35,22 +35,45 @@ class NhanvienService {
         return { nhanvien, plainPassword };
     }
 
-    async create(payload) {
+    // async create(payload) {
 
+    //     const { nhanvien, plainPassword } = await this.extractNhanvienData(payload);
+
+    //     const result = await this.Nhanvien.findOneAndUpdate(
+    //         { _id: nhanvien._id },
+    //         { $set: nhanvien },
+    //         { returnDocument: 'after', upsert: true }
+    //     );
+
+    //     // Gửi mật khẩu gốc qua email
+    //     await sendEmail(
+    //         nhanvien.emailNV,
+    //         'Thông tin tài khoản nhân viên của bạn',
+    //         `Xin chào ${nhanvien.tenNV},\n\nTài khoản nhân viên của bạn đã được tạo thành công.\nTên đăng nhập: ${nhanvien.taikhoanNV}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
+    //     );
+    //     return result;
+    // }
+
+
+    async create(payload) {
         const { nhanvien, plainPassword } = await this.extractNhanvienData(payload);
 
-        const result = await this.Nhanvien.findOneAndUpdate(
-            { _id: nhanvien._id },
-            { $set: nhanvien },
-            { returnDocument: 'after', upsert: true }
-        );
+        // Kiểm tra nếu nhân viên đã tồn tại
+        const existingNhanvien = await this.Nhanvien.findOne({ _id: nhanvien._id });
+        if (existingNhanvien) {
+            throw new Error('Tài khoản nhân viên đã tồn tại!');
+        }
 
-        // Gửi mật khẩu gốc qua email
+        // Tạo nhân viên mới
+        const result = await this.Nhanvien.insertOne(nhanvien);
+
+        // Gửi mật khẩu qua email
         await sendEmail(
             nhanvien.emailNV,
             'Thông tin tài khoản nhân viên của bạn',
-            `Xin chào ${nhanvien.tenNV},\n\nTài khoản nhân viên của bạn đã được tạo thành công.\nTên đăng nhập: ${nhanvien.taikhoanNV}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
+            `Xin chào ${nhanvien.tenNV},\n\nTài khoản của bạn đã được tạo thành công.\nTên đăng nhập: ${nhanvien.taikhoanNV}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
         );
+
         return result;
     }
 

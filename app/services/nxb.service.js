@@ -4,7 +4,7 @@ class NXBService {
     constructor(client) {
         this.NXB = client.db().collection('nxb');
     }
-//    dinh ngia cac phuong thuc
+    //    dinh ngia cac phuong thuc
     extractNXBData(payload) {
         const nxb = {
             _id: payload._id,
@@ -18,27 +18,41 @@ class NXBService {
         return nxb;
     }
 
+    // async create(payload) {
+
+    //     const nxb = this.extractNXBData(payload);
+
+    //     const result = await this.NXB.findOneAndUpdate(
+    //         nxb,
+    //         { $set: nxb },
+    //         { returnDocument: 'after', upsert: true }
+    //         );
+    //     return result;
+    // }
+
+
     async create(payload) {
-        
         const nxb = this.extractNXBData(payload);
-        
-        const result = await this.NXB.findOneAndUpdate(
-            nxb,
-            { $set: nxb },
-            { returnDocument: 'after', upsert: true }
-            );
-        return result;
+
+        // Kiểm tra nếu NXB đã tồn tại
+        const existingNXB = await this.NXB.findOne({ _id: nxb._id });
+        if (existingNXB) {
+            throw new Error('NXB đã tồn tại!');
+        }
+
+        // Tạo NXB mới
+        return await this.NXB.insertOne(nxb);
     }
 
 
-    async find (filter) {
+    async find(filter) {
         const cursor = this.NXB.find(filter);
         return await cursor.toArray();
     }
 
     async findByName(name) {
         return await this.find({
-            tenNXB: {$regex: new RegExp(new RegExp(name)), $options: 'i'}
+            tenNXB: { $regex: new RegExp(new RegExp(name)), $options: 'i' }
         });
     }
 
@@ -46,7 +60,7 @@ class NXBService {
         // if (!ObjectId.isValid(id)) {
         //     throw new Error('Invalid ObjectId');
         // }
-        
+
         try {
             const nxb = await this.NXB.findOne({
                 _id: id,
@@ -65,7 +79,7 @@ class NXBService {
     async update(id, payload) {
         const filter = {
             _id: id ? id : null,
-        };    
+        };
         const update = this.extractNXBData(payload);
         const result = await this.NXB.findOneAndUpdate(
             filter,
@@ -82,7 +96,7 @@ class NXBService {
         return result;
     }
 
-    async deleteAll (){
+    async deleteAll() {
         const result = await this.NXB.deleteMany({});
         return result.deletedCount;
     }

@@ -38,24 +38,47 @@ class DocgiaService {
         return { docgia, plainPassword };
     }
 
+    // async create(payload) {
+    //     const { docgia, plainPassword } = await this.extractDocgiaData(payload);
+
+    //     // Lưu đọc giả vào cơ sở dữ liệu
+    //     const result = await this.Docgia.findOneAndUpdate(
+    //         { _id: docgia._id },
+    //         { $set: docgia },
+    //         { returnDocument: 'after', upsert: true }
+    //     );
+
+    //     // Gửi mật khẩu gốc qua email
+    //     await sendEmail(
+    //         docgia.emailDG,
+    //         'Thông tin tài khoản đọc giả của bạn',
+    //         `Xin chào ${docgia.tenDG},\n\nTài khoản của bạn đã được tạo thành công.\nTên đăng nhập: ${docgia.taikhoanDG}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
+    //     );
+    //     return result;
+    // } // đang lỗi tạo mới khi đã có tk này rồi
+
+
     async create(payload) {
         const { docgia, plainPassword } = await this.extractDocgiaData(payload);
 
-        // Lưu đọc giả vào cơ sở dữ liệu
-        const result = await this.Docgia.findOneAndUpdate(
-            { _id: docgia._id },
-            { $set: docgia },
-            { returnDocument: 'after', upsert: true }
-        );
+        // Kiểm tra nếu đã tồn tại độc giả với _id
+        const existingDocgia = await this.Docgia.findOne({ _id: docgia._id });
+        if (existingDocgia) {
+            throw new Error('Tài khoản độc giả đã tồn tại!');
+        }
 
-        // Gửi mật khẩu gốc qua email
+        // Thêm độc giả mới
+        const result = await this.Docgia.insertOne(docgia);
+
+        // Gửi mật khẩu qua email
         await sendEmail(
             docgia.emailDG,
             'Thông tin tài khoản đọc giả của bạn',
             `Xin chào ${docgia.tenDG},\n\nTài khoản của bạn đã được tạo thành công.\nTên đăng nhập: ${docgia.taikhoanDG}\nMật khẩu: ${plainPassword}\n\nVui lòng đổi mật khẩu sau khi đăng nhập.`
         );
+
         return result;
-    } // đang lỗi tạo mới khi đã có tk này rồi
+    }
 
 
     async find(filter) {
