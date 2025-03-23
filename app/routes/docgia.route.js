@@ -17,4 +17,7 @@ router.route('/:id')
 router.route('/:id/changePassword')
     .put(docgia.changePassword);
 
+router.route('/forgotPassword')
+    .post(docgia.forgotPassword);
+
 module.exports = router;

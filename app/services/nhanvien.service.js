@@ -176,7 +176,7 @@ class NhanvienService {
             await sendEmail(
                 nhanvien.emailNV,
                 'Mật khẩu đã được thay đổi',
-                `Xin chào nhân viên ${nhanvien.tenNV},\n\nMật khẩu tài khoản của bạn đã được cập nhật thành công.`
+                `Xin chào nhân viên ${nhanvien.tenNV},\n\nMật khẩu của tài khoản ${nhanvien.taikhoanNV} đã được cập nhật thành công.`
             );
 
             return result;
@@ -185,6 +185,53 @@ class NhanvienService {
             throw error;
         }
     }
+
+    async forgotPassword(id, emailNV) {
+        try {
+            if (!id || !emailNV) {
+                throw new Error('Thiếu thông tin tài khoản hoặc email');
+            }
+
+            // Tìm nhân viên theo ID
+            const nhanvien = await this.findById(id);
+            if (!nhanvien) {
+                throw new Error('Không tìm thấy nhân viên');
+            }
+
+            // Kiểm tra email có khớp với tài khoản không
+            if (nhanvien.emailNV !== emailNV) {
+                throw new Error('Email không khớp với tài khoản');
+            }
+
+            // Tạo mật khẩu mới ngẫu nhiên
+            const newPassword = Math.random().toString(36).slice(-6);
+            const hashedPassword = await this.hashPassword(newPassword);
+
+            // Cập nhật mật khẩu vào database
+            const result = await this.Nhanvien.findOneAndUpdate(
+                { _id: id },
+                { $set: { matkhauNV: hashedPassword } },
+                { returnDocument: 'after' }
+            );
+
+            if (!result) {
+                throw new Error('Cập nhật mật khẩu thất bại');
+            }
+
+            // Gửi email thông báo mật khẩu mới
+            await sendEmail(
+                emailNV,
+                'Khôi phục mật khẩu tài khoản nhân viên',
+                `Xin chào ${nhanvien.tenNV},\n\nMật khẩu của tài khoản ${nhanvien.taikhoanNV}mới của bạn là: ${newPassword}\nVui lòng đăng nhập và đổi mật khẩu ngay lập tức để bảo mật tài khoản.`
+            );
+
+            return { success: true, message: 'Mật khẩu mới đã được gửi qua email' };
+        } catch (error) {
+            console.error('Lỗi khi khôi phục mật khẩu:', error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = NhanvienService;

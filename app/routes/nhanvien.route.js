@@ -16,4 +16,7 @@ router.route('/:id')
 router.route('/:id/changePassword')
     .put(nhanvien.changePassword);
 
+router.route('/forgotPassword')
+    .post(nhanvien.forgotPassword);
+
 module.exports = router;

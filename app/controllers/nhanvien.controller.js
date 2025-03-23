@@ -140,3 +140,20 @@ exports.changePassword = async (req, res, next) => {
         );
     }
 };
+
+exports.forgotPassword = async (req, res, next) => {
+    try {
+        const { id, emailNV } = req.body;
+
+        if (!id || !emailNV) {
+            return next(new ApiError(400, "Thiếu thông tin ID hoặc email."));
+        }
+
+        const nhanvienService = new NhanvienService(MongoDB.client);
+        const result = await nhanvienService.forgotPassword(id, emailNV);
+
+        return res.send(result);
+    } catch (error) {
+        return next(new ApiError(500, error.message || "Có lỗi xảy ra khi khôi phục mật khẩu."));
+    }
+};

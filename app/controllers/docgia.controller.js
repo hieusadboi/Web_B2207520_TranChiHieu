@@ -136,3 +136,24 @@ exports.changePassword = async (req, res, next) => {
         );
     }
 };
+
+
+exports.forgotPassword = async (req, res, next) => {
+    try {
+        const { id, emailDG } = req.body;
+
+        if (!id || !emailDG) {
+            return next(new ApiError(400, 'Vui lòng nhập tài khoản và email.'));
+        }
+
+        const docgiaService = new DocgiaService(MongoDB.client);
+        const result = await docgiaService.forgotPassword(id, emailDG);
+
+        return res.send(result);
+    } catch (error) {
+        return next(
+            new ApiError(500, error.message || 'Có lỗi xảy ra khi xử lý yêu cầu quên mật khẩu.')
+        );
+    }
+};
+

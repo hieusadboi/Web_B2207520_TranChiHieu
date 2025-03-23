@@ -138,8 +138,6 @@ class DocgiaService {
         return result ? true : false;
     }
 
-    // đổi mk đang k hoạt động.
-
     async delete(id) {
         const result = await this.Docgia.findOneAndDelete({
             _id: id ? id : null,
@@ -185,7 +183,7 @@ class DocgiaService {
             await sendEmail(
                 docgia.emailDG,
                 'Mật khẩu đã được thay đổi',
-                `Xin chào đọc giả ${docgia.tenDG},\n\nMật khẩu tài khoản của bạn đã được cập nhật thành công.`
+                `Xin chào đọc giả ${docgia.tenDG},\n\nMật khẩu của tài khoản ${docgia.taikhoanDG} đã được cập nhật thành công.`
             );
 
             return result;
@@ -194,6 +192,54 @@ class DocgiaService {
             throw error;
         }
     }
+
+    async forgotPassword(id, emailDG) {
+        try {
+            if (!id || !emailDG) {
+                throw new Error('Thiếu thông tin tài khoản hoặc email');
+            }
+
+            // Tìm độc giả theo ID
+            const docgia = await this.findById(id);
+            if (!docgia) {
+                throw new Error('Không tìm thấy độc giả');
+            }
+
+            // Kiểm tra email có khớp với tài khoản không
+            if (docgia.emailDG !== emailDG) {
+                throw new Error('Email không khớp với tài khoản');
+            }
+
+            // Tạo mật khẩu mới ngẫu nhiên
+            const newPassword = Math.random().toString(36).slice(-6);
+            const hashedPassword = await this.hashPassword(newPassword);
+
+            // Cập nhật mật khẩu vào database
+            const result = await this.Docgia.findOneAndUpdate(
+                { _id: id },
+                { $set: { matkhauDG: hashedPassword } },
+                { returnDocument: 'after' }
+            );
+
+            if (!result) {
+                throw new Error('Cập nhật mật khẩu thất bại');
+            }
+
+            // Gửi email thông báo mật khẩu mới
+            await sendEmail(
+                emailDG,
+                'Khôi phục mật khẩu tài khoản độc giả',
+                `Xin chào ${docgia.tenDG},\n\nMật khẩu của tài khoản ${docgia.taikhoanDG} được cấp mới của bạn là: ${newPassword}\nVui lòng đăng nhập và đổi mật khẩu ngay lập tức để bảo mật tài khoản.`
+            );
+
+            return { success: true, message: 'Mật khẩu mới đã được gửi qua email' };
+        } catch (error) {
+            console.error('Lỗi khi khôi phục mật khẩu:', error.message);
+            throw error;
+        }
+    }
+
+
 }
 
 module.exports = DocgiaService;

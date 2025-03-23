@@ -36,5 +36,14 @@ class DocgiaService {
     async changePassword(id, oldPassword, newPassword) {
         return (await this.api.put(`/${id}/changePassword`, { oldPassword, newPassword })).data;
     }
+
+    // async forgotPassword(id, email) {
+    //     return (await this.api.post(`/forgotPassword`, { id, email })).data;
+    // }
+
+    async forgotPassword(id, email) {
+        return (await this.api.post(`/forgotPassword`, { id, emailDG: email })).data;
+    }
+
 }
 export default new DocgiaService();

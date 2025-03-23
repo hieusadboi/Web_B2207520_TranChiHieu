@@ -36,5 +36,14 @@ class NhanvienService {
     async changePassword(id, oldPassword, newPassword) {
         return (await this.api.put(`/${id}/changePassword`, { oldPassword, newPassword })).data;
     }
+
+    // async forgotPassword(id, email) {
+    //     return (await this.api.post(`/forgotPassword`, { id, email })).data;
+    // }
+
+    async forgotPassword(id, email) {
+        return (await this.api.post(`/forgotPassword`, { id, emailNV: email })).data;
+    }
+
 }
 export default new NhanvienService();
