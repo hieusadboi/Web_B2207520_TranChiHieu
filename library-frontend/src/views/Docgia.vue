@@ -365,7 +365,7 @@ export default {
         let temp1 = this.list_y.some(user => user.maSach === book._id);
         let temp2 = this.list_m.some(user => user.maSach === book._id);
         if (temp1 || temp2) {
-          alert("Bạn chỉ được mượn một cuốn sách")
+          alert("Bạn đang mượn sách này, Hãy trả sách này trước khi mượn lại!")
         }
         else if (confirm(`Bạn có muốn mượn sách ${book._id}?`)) {
           const theodoi = {

@@ -1,0 +1,20 @@
+[{
+  "_id": "NV001",
+  "chucvuNV": "admin",
+  "diachiNV": "Vĩnh Long",
+  "dienthoaiNV": "0987654321",
+  "emailNV": "hieub2207520@student.ctu.edu.vn",
+  "matkhauNV": "$2b$10$jYN7vKBVsQel7JqDWqtXTuFEYmfwOitwoF7t.arMf3u6IkMo.4wpG",
+  "taikhoanNV": "NV001",
+  "tenNV": "Trần Chí Hiếu"
+},
+{
+  "_id": "NV002",
+  "chucvuNV": "quanly",
+  "diachiNV": "VLong",
+  "dienthoaiNV": "0901036971",
+  "emailNV": "tranchihieu3600@gmail.com",
+  "matkhauNV": "$2b$10$pdn4JpZIrXKzBYpHno2Sj.3uaGzziwfNOeCIFkzIkZXrFofmZGbym",
+  "taikhoanNV": "NV002",
+  "tenNV": "Nguyễn Công Minh"
+}]

@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "67d90198377df626eda9f890"
+  },
+  "ngaymuon": "3/18/2025",
+  "maSach": "2",
+  "ngaytra": "3/18/2025",
+  "trangthai": "t",
+  "maDG": "DG001"
+},
+{
+  "_id": {
+    "$oid": "67dd6fb7dd23b1fc08845056"
+  },
+  "maSach": "7",
+  "ngaytra": "3/22/2025",
+  "trangthai": "t",
+  "maDG": "13",
+  "ngaymuon": "3/21/2025"
+},
+{
+  "_id": {
+    "$oid": "67e01be3f0b3ab80e9efae35"
+  },
+  "maDG": "DG001",
+  "ngaymuon": "3/23/2025",
+  "trangthai": "m",
+  "maSach": "1",
+  "ngaytra": null
+},
+{
+  "_id": {
+    "$oid": "67e03fcaf0b3ab80e9efae37"
+  },
+  "maSach": "2",
+  "ngaytra": null,
+  "trangthai": "y",
+  "maDG": "DG001",
+  "ngaymuon": null
+}]

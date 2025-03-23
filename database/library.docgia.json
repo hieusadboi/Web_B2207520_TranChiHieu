@@ -1,0 +1,22 @@
+[{
+  "_id": "DG001",
+  "diachiDG": "Vĩnh Long",
+  "dienthoaiDG": "0901036971",
+  "emailDG": "hieub2207520@student.ctu.edu.vn",
+  "gioitinhDG": "Nam",
+  "matkhauDG": "$2b$10$ro67ifCM/RMVvAw7krzLOeNs/GCMXx/C/.eaIJGSmWQg42lMyTy26",
+  "ngaysinhDG": "2004-05-01",
+  "taikhoanDG": "DG001",
+  "tenDG": "Tran Chi Hieu"
+},
+{
+  "_id": "DG002",
+  "tenDG": "Nguyễn Công Minh",
+  "diachiDG": "Hồ Chí Minh",
+  "gioitinhDG": "Nam",
+  "ngaysinhDG": "1111-11-11",
+  "emailDG": "hieub2207520@student.ctu.edu.vn",
+  "dienthoaiDG": "0901036971",
+  "taikhoanDG": "DG002",
+  "matkhauDG": "$2b$10$Ebv6i6IG9ysVSoDy71ATeO83IJGO.bb/khAJEyDVn5KynYksyPlw."
+}]

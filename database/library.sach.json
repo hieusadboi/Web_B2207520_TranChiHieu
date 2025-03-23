@@ -1,0 +1,150 @@
+[{
+  "_id": "1",
+  "tenSach": "Giáo trình Lập trình Web",
+  "soquyenSach": 9,
+  "namXB": "2015-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Đỗ Thanh Nghị,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1728811?download=true",
+  "noiDung": "Lập trình web là quá trình xây dựng và phát triển trang web bằng các công nghệ như HTML, CSS, JavaScript để tạo giao diện và tương tác động, kết hợp với ngôn ngữ backend như PHP, Node.js hoặc Python để xử lý dữ liệu. Ngoài ra, lập trình web còn bao gồm việc quản lý cơ sở dữ liệu, bảo mật, tối ưu hiệu suất và triển khai trang web lên internet. Đây là một lĩnh vực quan trọng giúp tạo ra các website, ứng dụng phục vụ nhiều nhu cầu khác nhau như thương mại điện tử, blog, hay hệ thống quản lý. 🚀"
+},
+{
+  "_id": "2",
+  "tenSach": "Khai thác dữ liệu với Python",
+  "soquyenSach": 10,
+  "namXB": "2022-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Đỗ Thanh Nghị,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/691331?download=true",
+  "noiDung": "Khai thác dữ liệu với Python giới thiệu các kỹ thuật xử lý và phân tích dữ liệu bằng Python, sử dụng các thư viện mạnh mẽ như Pandas, NumPy, Matplotlib và Scikit-learn Cuốn sách hướng dẫn cách thu thập, làm sạch, trực quan hóa dữ liệu và áp dụng các mô hình máy học để rút ra thông tin hữu ích. Đây là tài liệu hữu ích cho những ai muốn khai thác sức mạnh của dữ liệu để đưa ra quyết định chính xác và hiệu quả hơn. 📊🚀"
+},
+{
+  "_id": "3",
+  "tenSach": "Giáo trình Lập trình hướng đối tượng Java",
+  "soquyenSach": 10,
+  "namXB": "2016-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Vũ Duy Linh,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1987846?download=true",
+  "noiDung": "Giáo trình Lập trình Hướng Đối Tượng với Java cung cấp kiến thức nền tảng về lập trình hướng đối tượng (OOP) trong Java, bao gồm các khái niệm như lớp, đối tượng, kế thừa, đa hình, đóng gói và trừu tượng. Cuốn sách hướng dẫn cách xây dựng ứng dụng Java một cách có tổ chức, tối ưu và dễ bảo trì. Bên cạnh lý thuyết, giáo trình còn có nhiều ví dụ thực tế và bài tập giúp người học rèn luyện kỹ năng lập trình hiệu quả."
+},
+{
+  "_id": "4",
+  "tenSach": "Hệ Quản Trị Cơ Sở Dữ Liệu",
+  "soquyenSach": 10,
+  "namXB": "2014-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Nguyễn Thái Nghe,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1858539?download=true",
+  "noiDung": "Hệ quản trị cơ sở dữ liệu (DBMS) là phần mềm dùng để tạo, quản lý và thao tác dữ liệu trong cơ sở dữ liệu. Nó cung cấp các công cụ cho phép lưu trữ, truy vấn, cập nhật và bảo mật dữ liệu một cách hiệu quả. DBMS giúp đảm bảo tính toàn vẹn, nhất quán, bảo mật và khả năng truy cập đồng thời cho nhiều người dùng. Các loại DBMS phổ biến gồm hệ quản trị quan hệ (MySQL, PostgreSQL, SQL Server), NoSQL (MongoDB, Cassandra) và hướng đối tượng. Ngoài ra, DBMS còn hỗ trợ các tính năng như sao lưu, phục hồi dữ liệu, tối ưu hóa hiệu suất và kiểm soát truy cập để đảm bảo hệ thống hoạt động ổn định."
+},
+{
+  "_id": "5",
+  "tenSach": "Giáo trình Lập trình thiết bị di động",
+  "soquyenSach": 10,
+  "namXB": "2016-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Ngô Bá Hùng,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1061758?download=true",
+  "noiDung": "Giáo trình Lập trình Thiết Bị Di Động cung cấp kiến thức về phát triển ứng dụng trên nền tảng di động như Android và iOS. Nội dung bao gồm thiết kế giao diện, quản lý vòng đời ứng dụng, xử lý sự kiện, lưu trữ dữ liệu và tối ưu hiệu suất. Bên cạnh lý thuyết, giáo trình còn có các ví dụ thực hành giúp người học xây dựng ứng dụng di động một cách hiệu quả và chuyên nghiệp."
+},
+{
+  "_id": "6",
+  "tenSach": "Giáo trình Kỹ thuật dự báo",
+  "soquyenSach": 10,
+  "namXB": "2019-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Vũ Duy Linh,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1183322?download=true",
+  "noiDung": "Giáo trình Kỹ thuật Dự báo giới thiệu các phương pháp dự báo giúp phân tích xu hướng và đưa ra quyết định dựa trên dữ liệu quá khứ. Nội dung bao gồm các phương pháp định tính như phương pháp chuyên gia, ý kiến hội đồng, và các phương pháp định lượng như phân tích chuỗi thời gian, hồi quy tuyến tính, trung bình trượt và mô hình ARIMA. Ngoài ra, giáo trình cũng đề cập đến dự báo trong môi trường bất định bằng mô phỏng Monte Carlo và cách áp dụng các công cụ như Excel, Python, R để hỗ trợ phân tích."
+},
+{
+  "_id": "7",
+  "tenSach": "Giáo trình Lập trình song song",
+  "soquyenSach": 10,
+  "namXB": "2014-11-11",
+  "maNXB": "CTU",
+  "tacgia": "Nguyễn Văn Hòa,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1678555?download=true",
+  "noiDung": "Giáo trình Lập trình Song Song giới thiệu các khái niệm, kỹ thuật và công cụ để lập trình trên hệ thống đa luồng, đa xử lý hoặc điện toán phân tán. Nội dung bao gồm tổng quan về lập trình song song, các mô hình tính toán như chia sẻ bộ nhớ và truyền thông điệp, cùng các phương pháp đồng bộ hóa để tránh tranh chấp tài nguyên. Ngoài ra, giáo trình còn hướng dẫn sử dụng các thư viện phổ biến như OpenMP, MPI và CUDA để tối ưu hóa hiệu suất xử lý trên CPU và GPU, giúp tăng tốc độ tính toán cho các ứng dụng khoa học và kỹ thuật."
+},
+{
+  "_id": "8",
+  "tenSach": "Giáo trình Mô hình hóa quyết định",
+  "soquyenSach": 10,
+  "namXB": "2014-11-11",
+  "maNXB": "CTU",
+  "tacgia": "Nguyễn Thái Nghe,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1663952?download=true",
+  "noiDung": "Giáo trình Mô hình hóa Quyết định trình bày các phương pháp và công cụ giúp ra quyết định tối ưu trong môi trường phức tạp và bất định. Nội dung bao gồm các khái niệm cơ bản về ra quyết định, mô hình ra quyết định đơn tiêu chí và đa tiêu chí, cũng như các kỹ thuật tối ưu hóa như quy hoạch tuyến tính, quy hoạch động và mô phỏng Monte Carlo. Ngoài ra, giáo trình còn giới thiệu các mô hình ra quyết định theo lý thuyết trò chơi, cây quyết định và phân tích rủi ro, cùng với ứng dụng của phần mềm như Excel, Python và R trong việc hỗ trợ ra quyết định."
+},
+{
+  "_id": "9",
+  "tenSach": "Thực tập Thiết kế hệ thống số",
+  "soquyenSach": 10,
+  "namXB": "2021-11-11",
+  "maNXB": "CTU",
+  "tacgia": "Trương Phong Tuyên,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/662923?download=true",
+  "noiDung": "Thực tập Thiết kế Hệ thống Số cung cấp kiến thức và kỹ năng thực hành trong việc thiết kế, mô phỏng và triển khai các hệ thống số. Nội dung bao gồm tổng quan về hệ thống số, các phương pháp biểu diễn dữ liệu, thiết kế mạch tổ hợp và mạch tuần tự, cùng với ứng dụng của ngôn ngữ mô tả phần cứng như VHDL và Verilog. Sinh viên sẽ thực hành trên các công cụ mô phỏng, lập trình FPGA và xây dựng các hệ thống số thực tế nhằm nâng cao kỹ năng thiết kế, tối ưu hóa và kiểm thử mạch điện tử."
+},
+{
+  "_id": "10",
+  "tenSach": "Giáo trình Các hệ thống phân tán",
+  "soquyenSach": 10,
+  "namXB": "2021-11-11",
+  "maNXB": "CTU",
+  "tacgia": "Ngô Bá Hùng,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1085543?download=true",
+  "noiDung": "Hệ Thống Phân Tán là một tập hợp các máy tính kết nối với nhau qua mạng, phối hợp xử lý dữ liệu như một hệ thống duy nhất. Chúng có đặc điểm quan trọng như tính đồng thời, khả năng mở rộng và chịu lỗi cao, giúp cải thiện hiệu suất và độ tin cậy. Các mô hình phổ biến bao gồm Client-Server, Peer-to-Peer, điện toán lưới và điện toán đám mây. Hệ thống phân tán được ứng dụng rộng rãi trong dịch vụ web, lưu trữ dữ liệu lớn, blockchain và trí tuệ nhân tạo, đóng vai trò quan trọng trong hạ tầng công nghệ hiện đại."
+},
+{
+  "_id": "11",
+  "tenSach": "Thương Mại Điện Tử",
+  "soquyenSach": 10,
+  "namXB": "2020-11-11",
+  "maNXB": "CTU",
+  "tacgia": " Trương Quốc Định,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1015418?download=true",
+  "noiDung": "**Giáo trình Thương mại Điện tử** cung cấp kiến thức về các nguyên tắc, mô hình và công nghệ trong hoạt động kinh doanh trực tuyến. Nội dung bao gồm tổng quan về thương mại điện tử, các mô hình kinh doanh số như B2B, B2C, C2C, cùng các nền tảng giao dịch trực tuyến. Ngoài ra, giáo trình cũng đề cập đến các vấn đề quan trọng như thanh toán điện tử, bảo mật thông tin, tiếp thị số và quản lý chuỗi cung ứng trực tuyến. Sinh viên sẽ được tiếp cận với các công cụ và công nghệ hỗ trợ thương mại điện tử, giúp nâng cao khả năng ứng dụng vào thực tế kinh doanh."
+},
+{
+  "_id": "12",
+  "tenSach": "Giáo trình Mạng máy tính",
+  "soquyenSach": 10,
+  "namXB": "2014-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Ngô",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1063408?download=true",
+  "noiDung": "Giáo trình Mạng Máy Tính cung cấp kiến thức từ cơ bản đến nâng cao về cách các máy tính kết nối và giao tiếp với nhau trong một hệ thống mạng. Nội dung sách bao gồm các khái niệm quan trọng như mô hình OSI, TCP/IP, địa chỉ IP, giao thức mạng, bảo mật mạng và các công nghệ truyền dữ liệu. Ngoài ra, sách còn trình bày chi tiết về cách thiết lập, quản lý và tối ưu hiệu suất mạng, giúp người đọc hiểu rõ cách vận hành của internet và mạng nội bộ (LAN, WAN). Đây là tài liệu hữu ích dành cho sinh viên công nghệ thông tin, kỹ sư mạng và những ai quan tâm đến lĩnh vực này."
+},
+{
+  "_id": "13",
+  "tenSach": "Giáo trình Hóa học và Hóa lý Polymer",
+  "soquyenSach": 10,
+  "namXB": "2020-01-01",
+  "maNXB": "CTU",
+  "tacgia": " Văn Phạm Đan Thủy,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1040431?download=true",
+  "noiDung": "Giáo trình Hóa học và Hóa lý Polymer cung cấp kiến thức nền tảng về cấu trúc, tính chất và các phản ứng của polymer. Nội dung sách bao gồm tổng quan về polymer, các phương pháp tổng hợp như trùng hợp và trùng ngưng, cùng với các đặc tính hóa học, cơ học và nhiệt động học của chúng. Ngoài ra, sách còn đề cập đến các kỹ thuật phân tích và ứng dụng thực tế của polymer trong công nghiệp, y sinh và môi trường. Đây là tài liệu quan trọng dành cho sinh viên, giảng viên và các nhà nghiên cứu trong lĩnh vực hóa học và khoa học vật liệu."
+},
+{
+  "_id": "14",
+  "tenSach": "Giáo trình Lập trình ứng dụng mạng",
+  "soquyenSach": 10,
+  "namXB": "2019-01-01",
+  "maNXB": "CTU",
+  "tacgia": " Nguyễn Minh Trung,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1958154?download=true",
+  "noiDung": "Giáo trình Lập trình Ứng Dụng Mạng cung cấp kiến thức từ cơ bản đến nâng cao về lập trình các ứng dụng mạng, giúp người học hiểu cách xây dựng và triển khai các hệ thống giao tiếp qua mạng. Nội dung sách bao gồm các giao thức mạng quan trọng như TCP/IP, UDP, HTTP, WebSocket, cũng như các mô hình lập trình mạng như client-server và peer-to-peer. Ngoài ra, giáo trình hướng dẫn cách sử dụng các thư viện và framework phổ biến để phát triển ứng dụng mạng trên nhiều nền tảng khác nhau. Đây là tài liệu hữu ích dành cho sinh viên công nghệ thông tin, lập trình viên và những ai quan tâm đến phát triển ứng dụng mạng."
+},
+{
+  "_id": "15",
+  "tenSach": "Giáo trình Các hệ thống tìm kiếm thông tin văn bản",
+  "soquyenSach": 10,
+  "namXB": "2014-01-01",
+  "maNXB": "CTU",
+  "tacgia": "Ngô Bá Hùng,...",
+  "hinhAnh": "https://ebook.ctu.edu.vn/o/commerce-media/accounts/-1/images/1104725?download=true",
+  "noiDung": "Giáo trình Các Hệ Thống Tìm Kiếm Thông Tin Văn Bản cung cấp kiến thức về các phương pháp và kỹ thuật trong việc truy xuất thông tin từ kho dữ liệu văn bản. Nội dung sách bao gồm các mô hình tìm kiếm như Boolean, vector, xác suất, cùng với các thuật toán đánh chỉ mục, xếp hạng và tối ưu hóa kết quả tìm kiếm. Ngoài ra, giáo trình còn đề cập đến xử lý ngôn ngữ tự nhiên (NLP) và ứng dụng trong các hệ thống tìm kiếm hiện đại như Google, Elasticsearch và công cụ tìm kiếm trên mạng xã hội. Đây là tài liệu hữu ích cho sinh viên, nhà nghiên cứu và những ai quan tâm đến lĩnh vực truy xuất thông tin và trí tuệ nhân tạo."
+}]
