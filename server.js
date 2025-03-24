@@ -48,8 +48,6 @@ wss.on('connection', (ws) => {
   });
 });
 
-console.log('WebSocket server is running on ws://localhost:3001');
-
 async function startServer() {
   try {
     await MongoDB.connect(config.db.uri);

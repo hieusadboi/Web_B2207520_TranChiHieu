@@ -1,34 +1,31 @@
-/* Color of the links BEFORE scroll */
-.navbar-scroll .nav-link,
-.navbar-scroll .navbar-toggler-icon,
-.navbar-scroll .navbar-brand {
-    color: #262626;
+.navbar {
+    background: transparent !important;
+    /* Xóa nền */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.2);
+    /* Nền trong suốt nhẹ */
+    backdrop-filter: blur(5px);
+    /* Hiệu ứng mờ nền */
+    -webkit-backdrop-filter: blur(10px);
+    /* Hỗ trợ Safari */
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    /* Viền nhẹ tạo cảm giác nổi bật */
 }
 
-/* Color of the navbar BEFORE scroll */
-.navbar-scroll {
-    background-color: #FFC017;
+/* Tăng độ tương phản để dễ nhìn */
+.navbar .nav-link {
+    color: rgba(0, 0, 0, 0.845) !important;
+    /* Màu chữ rõ ràng hơn */
+    font-weight: bold;
 }
 
-/* Color of the links AFTER scroll */
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-toggler-icon,
-.navbar-scroll .navbar-brand {
-    color: #262626;
-}
-
-/* Color of the navbar AFTER scroll */
-.navbar-scrolled {
-    background-color: #fff;
-}
-
-/* An optional height of the navbar AFTER scroll */
-.navbar.navbar-scroll.navbar-scrolled {
-    padding-top: auto;
-    padding-bottom: auto;
-}
-
-.navbar-brand {
-    font-size: unset;
-    height: 3.5rem;
+.navbar .nav-link:hover {
+    color: #007bff !important;
+    /* Hiệu ứng đổi màu khi hover */
 }

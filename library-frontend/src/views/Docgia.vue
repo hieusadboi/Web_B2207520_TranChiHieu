@@ -159,8 +159,8 @@ export default {
       switch (this.nav_pick) {
         case 0:
           return this.getList_Sach.map((timkiem) => {
-            const { _id, maNXB, tacagia, tenSach, namXB } = timkiem;
-            return [_id, maNXB, tacagia, tenSach, namXB].join("");
+            const { _id, maNXB, tacagia, tenSach, namXB, noiDung } = timkiem;
+            return [_id, maNXB, tacagia, tenSach, namXB, noiDung].join("");
           });
         case 2:
           return this.list_m.map((timkiem) => {
@@ -381,6 +381,9 @@ export default {
           this.getList_m()
         }
       } catch (error) {
+        if (confirm("Bạn chưa đăng nhập, hãy đăng nhập để mượn sách!")) {
+          this.logout();
+        }
         console.log(error)
       }
     },

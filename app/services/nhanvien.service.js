@@ -123,11 +123,13 @@ class NhanvienService {
             dienthoaiNV: payload.dienthoaiNV,
             emailNV: payload.emailNV,
         };
+
         const result = await this.Nhanvien.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: 'after' }
         );
+
         return result ? true : false;
     }
 

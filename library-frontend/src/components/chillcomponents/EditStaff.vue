@@ -1,54 +1,3 @@
-<!-- <template>
-    <form class="row g-3">
-        <div class="col-md-10">
-            <label class="form-label" for="name">Tên nhân viên</label>
-            <input type="text" id="name" class="form-control" placeholder="..." v-model="nhanvien.tenNV">
-        </div>
-        <div class="col-md-10">
-            <label class="form-label" for="diachi">Địa chỉ</label>
-            <input type="text" class="form-control" id="diachi" placeholder="..." v-model="nhanvien.diachiNV">
-        </div>
-        <div class="col-md-4">
-            <label class="form-label" for="dienthoai">Điện thoại</label>
-            <input type="text" class="form-control" id="dienthoai" placeholder="..." v-model="nhanvien.dienthoaiNV">
-        </div>
-        <div class="col-md-6">
-            <label class="form-label" for="Email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="..." v-model="nhanvien.emailNV">
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" for="chucvu">Chức vụ</label>
-            <input type="text" class="form-control" id="chucvu" placeholder="..." v-model="nhanvien.chucvuNV">
-        </div>
-    </form>
-</template>
-
-<script>
-import nhanvienService from '@/services/nhanvien.service';
-
-export default {
-
-    props: {
-        nhanvien: { type: Object, required: true }
-    },
-
-    methods: {
-        async updatetNhanVien() {
-            if (confirm("Hoàn tất!")) {
-                try {
-                    // Gọi phương thức update trực tiếp từ nhanvienService
-                    await nhanvienService.update(this.nhanvien._id, this.nhanvien);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-        }
-    },
-}
-
-</script> -->
-
-
 <template>
     <!-- Modal -->
     <div v-if="nhanvien">
@@ -88,8 +37,8 @@ export default {
                         <input type="text" id="email" class="form-control" placeholder="..."
                             v-model="localNhanvien.emailNV" />
                     </div>
-
-                    <!-- <div class="col-md-6">
+                    <!-- 
+                    <div class="col-md-6">
                         <label class="form-label" for="chucvu">Chức vụ</label>
                         <select id="chucvu" class="form-control" v-model="localNhanvien.chucvuNV">
                             <option value="quản lý">Quản lý</option>
@@ -121,14 +70,25 @@ export default {
         };
     },
 
+    watch: {
+        nhanvien: {
+            handler(newVal) {
+                this.localNhanvien = { ...newVal };
+            },
+            deep: true,
+            immediate: true,
+        },
+    },
+
     methods: {
         async updateNhanVien() {
             if (confirm("Bạn có chắc muốn cập nhật thông tin nhân viên?")) {
                 try {
                     const { matkhauNV, ...nhanvienData } = this.localNhanvien; // loại trường mk ra 
 
-                    await nhanvienService.update(this.localNhanvien._id, this.localNhanvien);
-                    this.$emit("updateSuccess", this.localNhanvien); // Phát sự kiện để thông báo cập nhật thành công
+                    await nhanvienService.update(this.localNhanvien._id, nhanvienData);
+                    alert("Cập nhật thông tin nhân viên thành công!");
+                    console.log("Cập nhật thông tin nhân viên thành công!");
                 } catch (error) {
                     console.error(error);
                 }

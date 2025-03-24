@@ -1,0 +1,68 @@
+/* Header của modal */
+.modal-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề modal */
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Định dạng input */
+.modal-body input {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hiệu ứng khi focus vào input */
+.modal-body input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Căn giữa nội dung form */
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Khoảng cách giữa các ô nhập */
+.modal-body .col-md-7 {
+    width: 100%;
+}
+
+/* Định dạng nút bấm */
+.modal-footer .btn {
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Nút chính */
+.modal-footer .btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Nút đóng */
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+}
+

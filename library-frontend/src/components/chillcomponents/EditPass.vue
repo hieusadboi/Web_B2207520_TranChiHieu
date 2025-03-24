@@ -91,3 +91,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import "@/assets/editpass.css";
+</style>
