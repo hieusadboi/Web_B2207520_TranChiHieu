@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import EditUser from "./chillcomponents/EditUser.vue";
+import EditUser from "../edit/EditUser.vue";
 export default {
   components: {
     EditUser,

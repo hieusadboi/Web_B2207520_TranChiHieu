@@ -108,17 +108,17 @@
 
 <script>
 
-import Card from "@/components/Card.vue";
-import ProfileUser from "@/components/ProfileUser.vue";
+import Card from "@/components/common/Card.vue";
+import ProfileUser from "@/components/common/ProfileUser.vue";
+import EditPassUser from "@/components/edit/EditPassUser.vue";
+import ListBorrow from "@/components/list/ListBorrow.vue";
+import ListBorrow_y from "@/components/list/ListBorrow_y.vue";
+import SearchBar_user from "@/components/common/SearchBar_user.vue";
 import sachService from "@/services/sach.service";
 import docgiaService from "@/services/docgia.service";
-import EditPassUser from "@/components/chillcomponents/EditPassUser.vue";
 import theodoiService from "@/services/theodoi.service";
-import ListBorrow from "@/components/ListBorrow.vue";
 import WebSocketService from "@/services/websocket.service";
-import ListBorrow_y from "@/components/ListBorrow_y.vue";
-import SearchBar_user from "@/components/SearchBar_user.vue";
-// import ListBorrowUser from "@/components/ListBorrowUser.vue";
+
 export default {
   components: {
     SearchBar_user,
@@ -154,7 +154,6 @@ export default {
   },
 
   computed: {
-    // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
     TimKiemStrings() {
       switch (this.nav_pick) {
         case 0:

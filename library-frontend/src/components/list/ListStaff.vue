@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import EditStaff from './chillcomponents/EditStaff.vue';
+import EditStaff from '../edit/EditStaff.vue';
 export default {
   components: {
     EditStaff

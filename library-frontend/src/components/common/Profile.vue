@@ -5,26 +5,15 @@
 </button> -->
 
   <!-- Modal -->
-  <div
-    class="modal fade"
-    :id="'profileModal' + this.user._id"
-    tabindex="-1"
-    role="dialog"
-    :aria-labelledby="'profileModalLabel' + this.user._id"
-    aria-hidden="true"
-  >
+  <div class="modal fade" :id="'profileModal' + this.user._id" tabindex="-1" role="dialog"
+    :aria-labelledby="'profileModalLabel' + this.user._id" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" :id="'profileModalLabel' + this.user._id">
             Thông tin nhân viên
           </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="container emp-profile">
@@ -32,11 +21,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="profile-img text-center">
-                    <img
-                      src="https://i.postimg.cc/15rsJ8G4/user.png"
-                      class="img-fluid rounded-circle"
-                      alt=""
-                    />
+                    <img src="https://i.postimg.cc/15rsJ8G4/user.png" class="img-fluid rounded-circle" alt="" />
                     <div class="mt-3">
                       <!-- <label class="btn btn-primary btn-sm">
                                             Change Photo <input type="file" name="file" hidden/>
@@ -50,23 +35,13 @@
                     <h6>{{ user.chucvuNV }}</h6>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item">
-                        <a
-                          class="nav-link active"
-                          id="home-tab"
-                          data-bs-toggle="tab"
-                          href="#home"
-                          role="tab"
-                          >Thông tin nhân viên</a
-                        >
+                        <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab">Thông tin
+                          nhân viên</a>
                       </li>
                     </ul>
                   </div>
                   <div class="tab-content profile-tab mt-3" id="myTabContent">
-                    <div
-                      class="tab-pane fade show active"
-                      id="home"
-                      role="tabpanel"
-                    >
+                    <div class="tab-pane fade show active" id="home" role="tabpanel">
                       <div class="row">
                         <div class="col-md-6"><label>Mã nhân viên</label></div>
                         <div class="col-md-6">
@@ -111,34 +86,18 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Đóng
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdropstaff"
-          >
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropstaff">
             Sửa thông tin
           </button>
         </div>
       </div>
     </div>
   </div>
-  <div
-    class="modal fade"
-    id="staticBackdropstaff"
-    data-bs-backdrop="true"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabelstaff"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="staticBackdropstaff" data-bs-backdrop="true" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabelstaff" aria-hidden="true">
     <div class="modal-dialog">
       <EditStaff :nhanvien="this.user" />
     </div>
@@ -149,7 +108,7 @@
 </template>
 
 <script>
-import EditStaff from "./chillcomponents/EditStaff.vue";
+import EditStaff from "../edit/EditStaff.vue";
 export default {
   components: {
     EditStaff,

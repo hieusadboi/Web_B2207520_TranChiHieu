@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import EditNXB from './chillcomponents/EditNXB.vue';
+import EditNXB from '../edit/EditNXB.vue';
 
 
 export default {

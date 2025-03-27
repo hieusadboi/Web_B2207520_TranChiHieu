@@ -102,7 +102,7 @@ export default {
 <script>
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
-import LoginForm from "@/components/LoginForm.vue";
+import LoginForm from "@/components/common/LoginForm.vue";
 import DocgiaService from "@/services/docgia.service";
 import NhanvienService from "@/services/nhanvien.service";
 import bcrypt from "bcryptjs";

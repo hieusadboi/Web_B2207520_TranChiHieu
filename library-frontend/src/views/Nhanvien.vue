@@ -195,21 +195,23 @@
     </div>
 </template>
 <script>
-import EditPass from "@/components/chillcomponents/EditPass.vue"
 
-import ListNXB from "@/components/ListNXB.vue"
-import ListBook from "@/components/ListBook.vue"
-import ListBorrow from "@/components/ListBorrow.vue"
-import ListUser from "@/components/ListUser.vue"
-import ListBorrow_y from "@/components/ListBorrow_y.vue"
-import ListStaff from "@/components/ListStaff.vue"
+import EditPass from "@/components/edit/EditPass.vue";
 
-import AddStaff from "@/components/AddStaff.vue"
-import AddUser from "@/components/AddUser.vue"
-import AddBook from "@/components/AddBook.vue"
-import Profile from "@/components/Profile.vue"
-import AddNXB from "@/components/AddNXB.vue"
-import SearchBar from "@/components/SearchBar.vue"
+import ListNXB from "@/components/list/ListNXB.vue";
+import ListBook from "@/components/list/ListBook.vue";
+import ListBorrow from "@/components/list/ListBorrow.vue";
+import ListUser from "@/components/list/ListUser.vue";
+import ListBorrow_y from "@/components/list/ListBorrow_y.vue";
+import ListStaff from "@/components/list/ListStaff.vue";
+
+import AddStaff from "@/components/add/AddStaff.vue";
+import AddUser from "@/components/add/AddUser.vue";
+import AddBook from "@/components/add/AddBook.vue";
+import AddNXB from "@/components/add/AddNXB.vue";
+
+import Profile from "@/components/common/Profile.vue";
+import SearchBar from "@/components/common/SearchBar.vue";
 
 import NXBService from "@/services/nxb.service"
 import DocgiaService from "@/services/docgia.service";
@@ -295,8 +297,8 @@ export default {
                     });
                 case 7:
                     return this.list_book.map((timkiem) => {
-                        const { _id, maNXB, soquyenSach, tacgia, tenSach, namNXB } = timkiem;
-                        return [_id, maNXB, soquyenSach, tacgia, tenSach, namNXB].join("");
+                        const { _id, maNXB, soquyenSach, tacgia, tenSach, namNXB, noiDung } = timkiem;
+                        return [_id, maNXB, soquyenSach, tacgia, tenSach, namNXB, noiDung].join("");
                     });
                 case 8:
                     return this.list_nxb.map((timkiem) => {
@@ -322,34 +324,34 @@ export default {
                 case 5:
                     if (!this.searchText) return this.list_m;
                     return this.list_m.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index]?.includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
                 case 6:
                     if (!this.searchText) return this.list_user;
                     return this.list_user.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index].includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
 
                 case 7:
                     if (!this.searchText) return this.list_book;
                     return this.list_book.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index].includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
 
                 case 8:
                     if (!this.searchText) return this.list_nxb;
                     return this.list_nxb.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index].includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
                 case 9:
                     if (!this.searchText) return this.list_t;
                     return this.list_t.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index].includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
                 case 11:
                     if (!this.searchText) return this.list_staff;
                     return this.list_staff.filter((_timkiem, index) =>
-                        this.TimKiemStrings[index].includes(this.searchText)
+                        this.TimKiemStrings[index].toLowerCase().includes(this.searchText.toLowerCase())
                     );
                 default: return [];
             }
@@ -812,6 +814,11 @@ main {
     transition: background 0.3s;
 }
 
+.dropdown-menu {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(93, 177, 255, 0.527);
+}
 
 .page {
     text-align: left;

@@ -29,3 +29,9 @@
     color: #007bff !important;
     /* Hiệu ứng đổi màu khi hover */
 }
+
+.dropdown-menu {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(93, 177, 255, 0.527);
+}
